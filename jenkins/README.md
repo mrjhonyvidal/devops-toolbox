@@ -21,3 +21,7 @@ docker logs -f CONTAINER_ID
 Access in the ip obtained in docker logs o using docker inspect CONTAINER_ID --> IPADDRESS
 http://IP_CONTAINER:8080/
 
+
+### AUTOMATION SCRIPTS RUNNING ON JENKINS
+
+Create a file in automation_scripts folder and add execution permisions as sudo user: chmod +x SCRIPT_NAME.sh
