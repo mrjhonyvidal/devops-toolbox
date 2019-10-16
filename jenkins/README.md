@@ -1,8 +1,7 @@
 ### INSTRUCTIONS
 
-Set locally
+Create folder jenkins_home to be used by docker-compose.yml:
 ```
-create folder jenkins_home to be used in docker-compose.yml
 mkdir jenkins_home
 
 docker pull jenkins/jenkins
@@ -25,3 +24,17 @@ http://IP_CONTAINER:8080/
 ### AUTOMATION SCRIPTS RUNNING ON JENKINS
 
 Create a file in automation_scripts folder and add execution permisions as sudo user: chmod +x SCRIPT_NAME.sh
+
+Copy file from local to Docker container
+
+```
+docker cp prueba-automation-script.sh jenkins_jenkins_1:/home/prueba-automation-script.sh
+```
+
+[Manage Jenkins from script or shell environment using Jenkins CLI](https://jenkins.io/doc/book/managing/cli/) 
+
+We download jenkins-cli.jar from inside Jenkins manager area: DOCKER_JENKINS_IP:8080/jnlpJars/jenkins-cli.jar
+
+```
+java -jar jenkins-cli.jar -s http://DOCKER_JENKINS_IP:8080 -ssh -user YOUR_USER_CREATED_IN_JENKINS help
+```
