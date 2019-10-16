@@ -2,6 +2,9 @@
 
 Set locally
 ```
+create folder jenkins_home to be used in docker-compose.yml
+mkdir jenkins_home
+
 docker pull jenkins/jenkins
 
 sudo chown $USER -R ~/jenkins 
