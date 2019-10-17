@@ -1,9 +1,6 @@
 ### INSTRUCTIONS
 
-Create folder jenkins_home to be used by docker-compose.yml:
 ```
-mkdir jenkins_home
-
 docker pull jenkins/jenkins
 
 sudo chown $USER -R ~/jenkins 
@@ -38,3 +35,4 @@ We download jenkins-cli.jar from inside Jenkins manager area: DOCKER_JENKINS_IP:
 ```
 java -jar jenkins-cli.jar -s http://DOCKER_JENKINS_IP:8080 -ssh -user YOUR_USER_CREATED_IN_JENKINS help
 ```
+
