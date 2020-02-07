@@ -1,11 +1,5 @@
 node {
 
-    try {
-        def mvnHome
-        def pom
-        def artifactVersion
-    }
-
     stage('Prepare') {
         echo 'Something here'
     }
