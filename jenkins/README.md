@@ -3,7 +3,9 @@
 ```
 docker pull jenkins/jenkins
 
-sudo chown $USER -R ~/jenkins 
+mkdir jenkins_home folder (same level of docker-compose.yml file)
+
+sudo chown $USER -R $PWD/jenkins_home 
 
 docker-compose up -d
 
@@ -15,7 +17,7 @@ docker logs -f CONTAINER_ID
 ```
 
 Access in the ip obtained in docker logs o using docker inspect CONTAINER_ID --> IPADDRESS
-http://IP_CONTAINER:8080/
+http://IP_CONTAINER:8080/ or just http://0.0.0.0:8080.
 
 
 ### AUTOMATION SCRIPTS RUNNING ON JENKINS

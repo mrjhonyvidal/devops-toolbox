@@ -2,3 +2,5 @@ jenkins/jenkins_home/*
 jenkins/centos7/*
 .swp
 .md.swp
+jenkins_home/*
+.idea/*
