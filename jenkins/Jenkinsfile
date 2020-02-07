@@ -1,0 +1,37 @@
+node {
+
+    try {
+        def mvnHome
+        def pom
+        def artifactVersion
+    }
+
+    stage('Prepare') {
+        echo 'Something here'
+    }
+
+    stage('Checkout') {
+        checkout scm
+    }
+
+    stage('Build') {
+        sh "mvn -B -DskipTests clean package"
+    }
+
+    stage('Unit Test') {
+        junit '**/target/surefire-reports/TEST-*.xml'
+        archive 'target/*.jar'
+    }
+
+    stage('Integration Test') {
+        echo "integration"
+    }
+
+    stage('Connectors Compabibility') {
+        echo "Set script here"
+    }
+
+    stage('Sonar') {
+        echo "integration"
+    }
+}
