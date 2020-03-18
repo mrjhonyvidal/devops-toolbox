@@ -1,7 +1,4 @@
 node {
-    mvnHome = tool name: 'Maven (latest)', type: 'hudson.tasks.Maven$MavenInstallation'
-    jdkHome = tool name: 'Java 8', type: 'hudson.model.JDK'
-
     stage('Prepare') {
         echo 'Set environment variables and pre-checks'
     }
@@ -10,9 +7,16 @@ node {
         checkout scm
     }
 
-    stage('Build'){
-        withEnv(["PATH=${jdkHome}/bin:${mvnHome}/bin:${env.PATH}", "M2_HOME=${mvnHome}"]) {
-            sh "mvn -B -DskipTests clean package"
+    stage('Compile'){
+        // TODO extract JDK and MAVEN paths to own job <Environment Configuration>
+        // Use of Maven
+        // --batch-mode : recommended in CI to inform maven to not run in interactive mode (less logs)
+        // -V : strongly recommended in CI, will display the JDK and Maven versions in use.
+        // -U : force maven to update snapshots each time (default : once an hour, makes no sense in CI).
+        // -Dsurefire.useFile=false : useful in CI. Displays test errors in the logs directly (instead of
+        //                            having to crawl the workspace files to see the cause).
+        withEnv(["JAVA_HOME=${ tool 'jdk-1.8.0_64bits' }", "PATH+MAVEN=${tool 'maven-3.6.1'}/bin:${env.JAVA_HOME}/bin"]) {
+            sh "mvn --batch-mode clean install -V -U -Dsurefire.useFile=false"
         }
     }
 
@@ -26,5 +30,9 @@ node {
 
     stage('SonarQube') {
         echo "Running SonarQube static analyzer..."
+    }
+
+    stage('Build') {
+       echo "Build package"
     }
 }
