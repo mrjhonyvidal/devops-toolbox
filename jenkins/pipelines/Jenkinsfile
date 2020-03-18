@@ -1,4 +1,9 @@
 node {
+    tools {
+        maven 'Maven 3.3.9'
+        jdk 'jdk8'
+    }
+
     stage('Prepare') {
         echo 'Set environment variables and pre-checks'
     }
@@ -8,6 +13,7 @@ node {
     }
 
     stage('Build') {
+        echo "M2_HOME = ${M2_HOME}"
         sh "mvn -B -DskipTests clean package"
     }
 
