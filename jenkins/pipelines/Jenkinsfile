@@ -1,0 +1,25 @@
+node {
+    stage('Prepare') {
+        echo 'Set environment variables and pre-checks'
+    }
+
+    stage('Checkout') {
+        checkout scm
+    }
+
+    stage('Build') {
+        sh "mvn -B -DskipTests clean package"
+    }
+
+    stage('Unit Tests') {
+        echo "Running Unit tests"
+    }
+
+    stage('Integration Test') {
+        echo "Define the integration tests"
+    }
+
+    stage('SonarQube') {
+        echo "Running SonarQube static analyzer..."
+    }
+}
