@@ -1,8 +1,6 @@
 node {
-    tools {
-        maven 'Maven 3.3.9'
-        jdk 'jdk8'
-    }
+    mvnHome = tool name: 'Maven (latest)', type: 'hudson.tasks.Maven$MavenInstallation'
+    jdkHome = tool name: 'Java 8', type: 'hudson.model.JDK'
 
     stage('Prepare') {
         echo 'Set environment variables and pre-checks'
@@ -12,9 +10,10 @@ node {
         checkout scm
     }
 
-    stage('Build') {
-        echo "M2_HOME = ${M2_HOME}"
-        sh "mvn -B -DskipTests clean package"
+    stage('Build')
+        withEnv(["PATH=${jdkHome}/bin:${mvnHome}/bin:${env.PATH}", "M2_HOME=${mvnHome}"]) {
+            sh "mvn -B -DskipTests clean package"
+        }
     }
 
     stage('Unit Tests') {
