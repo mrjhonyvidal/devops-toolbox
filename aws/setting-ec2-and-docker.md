@@ -7,6 +7,8 @@ Jenkins - http://your-ip-address:8080
 SonarQube - http://your-ip-address:9000
 GitLab - http://your-ip-address:10080
 ```
+![](https://res.cloudinary.com/dsk6auln9/image/upload/c_scale,w_1962/v1600557507/us9vdzerfcbntbx2uo5w.png)
+
 
 LogIn to your EC2 instance
 ```
