@@ -61,7 +61,7 @@ Make docker-autostart
 Install git and clone our docker-compose.yml
 ```
 yum install -y git
-git clone https://github.com/sms-joliveira/devops-swissarmyknife/docker/jenkins-sonar-docker-compose/docker-compose.yml
+git clone https://github.com/sms-joliveira/devops-swissarmyknife/blob/master/docker/jenkins-sonar-docker-compose/docker-compose.yml
 ```
 
 ### Resources
