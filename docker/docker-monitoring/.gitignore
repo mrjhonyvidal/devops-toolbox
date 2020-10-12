@@ -1,0 +1,7 @@
+.idea
+
+# Mac
+.DS_Store
+/containers/analytics/influxdb/data/
+/containers/analytics/grafana/data/
+/containers/analytics/prometheus/data/
