@@ -5,3 +5,4 @@ jenkins/centos7/*
 jenkins_home/*
 .idea/*
 jenkins/demo-app-jenkinsfile/target/*
+target/*

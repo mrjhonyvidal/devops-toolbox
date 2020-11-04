@@ -37,7 +37,7 @@ In your Local Jenkins (http://localhost:8787) add a new pipeline project, let's 
 
 Click on New Item in the Jenkins menu:
 
-- Name the project "pipelinedemo"
+- Name the project "demo-app-jenkinsfile"
 - Click on Pipeline
 - Click [ OK ]
 - Tick the checkbox Poll SCM in the Build Triggers section. Leave the Schedule empty. In the Pipeline section:
