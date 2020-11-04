@@ -1,13 +1,25 @@
+# ------------------------------------------------------------------------------
+# Ref: https://docs.docker.com/compose/compose-file/
+#
+# Install docker:
+# https://www.docker.com/products/docker
+#
+# docker-compose -p local-jenkins down
+# docker-compose -p local-jenkins up -d
+# docker-compose -p local-jenkins logs
+#
+# Use the password from the logs output to access the instance.
+# http://localhost:8787/
+# ------------------------------------------------------------------------------
 version: "3"
 services:
-  jenkins:
-    container_name: jenkins
-    image: "jenkins/jenkins"
+  local-jenkins:
+    build:
+      context: ./
+      dockerfile: Dockerfile
     ports:
-      - "8080:8080"
+      - "8787:8080"
+      - "50000:50000"
     volumes:
       - "$PWD/jenkins_home:/var/jenkins_home"
-    networks: 
-      - net
-networks:
-  net: 
+    restart: "always"

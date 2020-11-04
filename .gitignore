@@ -4,3 +4,4 @@ jenkins/centos7/*
 .md.swp
 jenkins_home/*
 .idea/*
+jenkins/demo-app-jenkinsfile/target/*
