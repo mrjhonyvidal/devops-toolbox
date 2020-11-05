@@ -1,11 +1,11 @@
 node {
-    // Determine the version to be released
-    def pomVersion = ''
-    def minorVersion = ''
-    def latestTag = ''
-    def lastPatch = ''
-
     stage("Create Tag") {
+        // Determine the version to be released
+        def pomVersion = ''
+        def minorVersion = ''
+        def latestTag = ''
+        def lastPatch = ''
+
             String branchName = "${BRANCH_NAME}";
                        if(branchName.equals('master')){
                            withEnv(["PATH=${jdkHome}/bin:${mvnHome}/bin:${env.PATH}", "M2_HOME=${mvnHome}"]) {
