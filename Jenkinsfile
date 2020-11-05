@@ -1,6 +1,6 @@
 node {
     stage("Create Tag") {
-            String branchName = "${BRANCH_NAME}";
+            String branchName = "${env.BRANCH_NAME}";
                        if(branchName.equals('master')){
                            withEnv(["PATH=${jdkHome}/bin:${mvnHome}/bin:${env.PATH}", "M2_HOME=${mvnHome}"]) {
                                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
