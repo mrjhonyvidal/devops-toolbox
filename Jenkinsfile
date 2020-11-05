@@ -1,6 +1,6 @@
 node {
     stage("Create Tag") {
-                       if(env.BRANCH_NAME == 'master')){
+                       if(env.BRANCH_NAME == 'master'){
                            withEnv(["PATH=${jdkHome}/bin:${mvnHome}/bin:${env.PATH}", "M2_HOME=${mvnHome}"]) {
                                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                                    configFileProvider([configFile(fileId: MVN_SETTINGS_CONFIG_FIELD, variable: 'MAVEN_SETTINGS')]) {
