@@ -6,54 +6,6 @@ node {
     def lastPatch = ''
 
     stage("Create Tag") {
-            String branchName = "${BRANCH_NAME}";
-            if(branchName.equals('master')){
 
-              /**
-              * Define Maven home and execute below commands with GIT credentials
-              */
-              withEnv(["PATH=${jdkHome}/bin:${mvnHome}/bin:${env.PATH}", "M2_HOME=${mvnHome}"]) {
-                        withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                            configFileProvider([configFile(fileId: MVN_SETTINGS_CONFIG_FIELD, variable: 'MAVEN_SETTINGS')]) {
-                        pomVersion = sh (
-                                script: 'mvn help:evaluate -Dexpression=project.version -q -DforceStdout',
-                                returnStdout: true
-                        ).trim()
-                        echo 'Pom version ' + pomVersion
-                        lastPatch = pomVersion.substring(pomVersion.size()-pomVersion.reverse().indexOf('.'))
-                        minorVersion = pomVersion.substring(0, pomVersion.indexOf(lastPatch))
-                        echo 'Minor version ' + minorVersion
-                        sh "git fetch --all --tags"
-                        sh "git tag --sort=version:refname -l v${minorVersion}[0-9]* > tags.txt"
-                        latestTag = sh (
-                                script: 'tail -n1 tags.txt',
-                                returnStdout: true
-                        ).trim()
-                        echo 'Latest tag ' + latestTag
-                        releaseVersion = "${pomVersion}"
-                        if(latestTag.equals(releaseVersion)){
-                            sh "git push origin :refs/tags/${latestTag}"
-                            sh "git tag -fa ${latestTag}"
-                            sh "git push origin ${latestTag}"
-                        }else {
-                            newTagName = "v${pomVersion}"
-                            // Release version
-                            sh "find -name 'pom.xml' | xargs sed -i 's/<version>${pomVersion}-SNAPSHOT<\\/version>/<version>${releaseVersion}<\\/version>/g'"
-                            sh "mvn -s ${env.MAVEN_SETTINGS_PATH} clean install --non-recursive"
-                            sh "git checkout ."
-                            sh "mvn -s ${env.MAVEN_SETTINGS_PATH} clean install --non-recursive"
-                            sh("mvn -s ${env.MAVEN_SETTINGS_PATH} -U" +
-                                    " -DreleaseVersion=${releaseVersion}" +
-                                    " -Darguments='-DskipTests -Dmaven.deploy.skip=true'" +
-                                    " release:clean release:prepare release:perform"
-                            )
-                            echo "Checking out new tag v${releaseVersion}"
-                            sh "git tag -a ${tagName} -m \"tag version ${tagName}\""
-                            sh "git push origin ${tagName}"
-                        }
-                    } else sh "echo Tag creation is only made for master branch"
-                 }
-              }
-            }
-        }
+    }
 }
