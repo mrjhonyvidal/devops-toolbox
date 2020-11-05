@@ -65,4 +65,3 @@ node {
                        } else sh "echo Tag creation is only made for master branch"
             }
     }
-}
