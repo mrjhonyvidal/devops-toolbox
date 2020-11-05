@@ -1,6 +1,6 @@
 node {
     stage("Create Tag") {
-            String branchName = "{env.BRANCH_NAME}";
+            String branchName = "${env.BRANCH_NAME}";
                        sh "Branch Name" + branchName
                        if(branchName.equals('master')){
                            withEnv(["PATH=${jdkHome}/bin:${mvnHome}/bin:${env.PATH}", "M2_HOME=${mvnHome}"]) {
