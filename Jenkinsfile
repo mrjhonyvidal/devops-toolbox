@@ -1,7 +1,6 @@
 node {
     checkout scm
     env.MAVEN_SETTINGS_PATH = '/var/lib/jenkins/settings.xml'
-    def jdkHome = tool name: 'Java 8', type: 'hudson.model.JDK'
     stage("Create Tag") {
                        if(env.BRANCH_NAME == 'master'){
                                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
