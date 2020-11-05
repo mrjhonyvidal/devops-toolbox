@@ -1,11 +1,9 @@
 node {
     checkout scm
     env.MAVEN_SETTINGS_PATH = '/var/lib/jenkins/settings.xml'
-    def mvnHome = tool name: 'Maven (latest)', type: 'hudson.tasks.Maven$MavenInstallation'
     def jdkHome = tool name: 'Java 8', type: 'hudson.model.JDK'
     stage("Create Tag") {
                        if(env.BRANCH_NAME == 'master'){
-                           withEnv(["PATH=${jdkHome}/bin:${mvnHome}/bin:${env.PATH}", "M2_HOME=${mvnHome}"]) {
                                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                                    configFileProvider([configFile(fileId: MVN_SETTINGS_CONFIG_FIELD, variable: 'MAVEN_SETTINGS')]) {
 
@@ -47,16 +45,15 @@ node {
                                            sh "git push origin ${latestTag}"
                                        }else {
                                            // Release version
-                                           sh "${mvnHome}/bin/mvn -gs ${env.MAVEN_SETTINGS} clean install --non-recursive"
+                                           sh "mvn -gs ${env.MAVEN_SETTINGS} clean install --non-recursive"
                                            sh "git checkout ."
-                                           sh "${mvnHome}/bin/mvn -gs ${env.MAVEN_SETTINGS} clean install --non-recursive"
+                                           sh "mvn -gs ${env.MAVEN_SETTINGS} clean install --non-recursive"
 
                                            echo "Checking out new tag ${newTagNameCandidate}"
                                            sh "git tag ${newTagNameCandidate} -m \"tag version ${newTagNameCandidate}\""
                                            sh "git push origin ${newTagNameCandidate}"
 
                                        }
-                                   }
                                }
                            }
                        } else sh "echo Tag creation is only made for master branch"
