@@ -6,3 +6,5 @@ jenkins_home/*
 .idea/*
 jenkins/demo-app-jenkinsfile/target/*
 target/*
+.DS_Store
+*.zip
