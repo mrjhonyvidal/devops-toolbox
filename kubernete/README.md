@@ -85,7 +85,7 @@ Instead, when using Docker Desktop's Kubernetes, we would visit: localhost:31515
 
 ```
 
-
+ 
 Checking kubectl version
 ```
 kubectl cluster-info
