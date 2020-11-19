@@ -74,18 +74,6 @@ Going to see something like this:
 💡  You can also use 'minikube kubectl -- get pods' to invoke a matching version
 ```
 
-Running our app
-Deploy our React app, using minikube we would visit:
-
-192.168.99.101:31515
-
-Instead, when using Docker Desktop's Kubernetes, we would visit: localhost:31515
-```
-
-
-```
-
- 
 Checking kubectl version
 ```
 kubectl cluster-info
