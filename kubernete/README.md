@@ -56,6 +56,7 @@ Running Minikube on terminal
 ```
 minikube start
 minikube start --vm-driver hyperv/virtualbox
+minikube start --vm-driver=hyperkit ==> Mac
 minikube status
 
 Going to see something like this:

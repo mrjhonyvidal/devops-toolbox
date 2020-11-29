@@ -4,11 +4,18 @@
 Deploy our React app, using minikube we would visit: `192.168.99.101:31515`
 When using Docker Desktop's Kubernetes, please visit: `localhost:31515`
 
+Specify a new vm driver instead of none, that would be work. On mac:
+
+minikube start --vm-driver=hyperkit
+
 ```
+minikube delete
+minikube start --vm-driver=hyperkit
 kubectl apply -f client-pod.yaml 
 kubectl apply -f client-node-port.yaml
 kubectl get pods
 minikube ip --> print the IP of the Kubernetes Node VM running your pods
+Go to http://IP_RETURNED_FROM_MINIKUBE:31515/
 ```
 kubectl: CLI we use to change our kubernetes cluster
 
